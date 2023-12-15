@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: |
+  mc-app-api
+  SAM Template for mc-app-api
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  MCAppApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: mc-app-api/
+      Handler: index.lambdaHandler
+      Runtime: nodejs20.x
+      Events:
+        ServerlessRestApiGETask:
+          Type: Api
+          Properties:
+            Auth:
+              ApiKeyRequired: true
+            Path: /ask
+            Method: GET
+        ServerlessRestApiPOSTask:
+          Type: Api
+          Properties:
+            Auth:
+              ApiKeyRequired: true
+            Path: /ask
+            Method: POST
+      MemorySize: 3008
+      Timeout: 30
+      Environment:
+        Variables:
+          SLACK_BOT_OAUTH_TOKEN: xyz
+          SLACK_SIGNIN_SECRET: xyz
+          NOTION_SECRET: xyz
+          NOTION_HEXAGRAMS_TABLE_ID: xyz
+          NOTION_QUESTIONS_TABLE_ID: xyz
+          CHANNEL_GENERAL_ID: xyz
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+          - index.ts
+        External:
+          - '@aws-sdk/*'
+          - aws-sdk
+        Minify: false
+Outputs:
+  MCAppApi:
+    Description: API Gateway endpoint URL for Prod stage for MCAppApi function
+    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ask/
+  MCAppApiFunction:
+    Description: MCAppApi Lambda Function ARN
+    Value: !GetAtt MCAppApiFunction.Arn
+  MCAppApiFunctionIamRole:
+    Description: Implicit IAM Role created for MCAppApi function
+    Value: !GetAtt MCAppApiFunction.Arn
