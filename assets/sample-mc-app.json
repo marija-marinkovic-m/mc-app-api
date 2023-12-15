@@ -22,16 +22,16 @@
           "type": "string",
           "title": "First Name"
         },
-				{
-					"name": "lastname",
-					"type": "string",
-					"title": "Last Name"
-				},
-				{
-					"name": "email",
-					"type": "string",
-					"title": "Email"
-				}
+        {
+          "name": "lastname",
+          "type": "string",
+          "title": "Last Name"
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "title": "Email"
+        }
       ],
       "title": "Ask Oracle",
       "guidance": "",
@@ -51,10 +51,10 @@
             }
           ],
           "payload": {
-						"firstName": "[[firstname]]",
-						"lastName": "[[lastname]]",
-						"email": "[[email]]"
-					}
+            "firstName": "[[firstname]]",
+            "lastName": "[[lastname]]",
+            "email": "[[email]]"
+          }
         }
       ],
       "description": "Random game with random answers to attract the unassuming"
