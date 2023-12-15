@@ -28,16 +28,20 @@ Resources:
               ApiKeyRequired: true
             Path: /ask
             Method: POST
+        ServerlessRestApiSlackPOSTask:
+          Type: Api
+          Properties:
+            Path: /store
+            Method: POST
       MemorySize: 3008
       Timeout: 30
       Environment:
         Variables:
-          SLACK_BOT_OAUTH_TOKEN: xyz
-          SLACK_SIGNIN_SECRET: xyz
-          NOTION_SECRET: xyz
-          NOTION_HEXAGRAMS_TABLE_ID: xyz
-          NOTION_QUESTIONS_TABLE_ID: xyz
-          CHANNEL_GENERAL_ID: xyz
+          SLACK_BOT_OAUTH_TOKEN: xxx
+          SLACK_SIGNIN_SECRET: xxx
+          NOTION_SECRET: xxx
+          NOTION_QUESTIONS_TABLE_ID: xxx
+          CHANNEL_GENERAL_ID: xxx
     Metadata:
       BuildMethod: esbuild
       BuildProperties:
@@ -51,6 +55,9 @@ Outputs:
   MCAppApi:
     Description: API Gateway endpoint URL for Prod stage for MCAppApi function
     Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ask/
+  MCAppApiStore:
+    Description: API Gateway endpoint URL for Prod stage for MCAppApi function
+    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/store/
   MCAppApiFunction:
     Description: MCAppApi Lambda Function ARN
     Value: !GetAtt MCAppApiFunction.Arn

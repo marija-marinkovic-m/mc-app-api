@@ -1,0 +1,63 @@
+{
+  "auth": {
+    "type": "APIKEY",
+    "params": [
+      {
+        "name": "token",
+        "title": "Enter your secret key:"
+      }
+    ],
+    "connection": {
+      "headers": {
+        "x-api-key": "[[token]]"
+      }
+    }
+  },
+  "actions": [
+    {
+      "name": "ask_oracle",
+      "forms": [
+        {
+          "name": "firstname",
+          "type": "string",
+          "title": "First Name"
+        },
+				{
+					"name": "lastname",
+					"type": "string",
+					"title": "Last Name"
+				},
+				{
+					"name": "email",
+					"type": "string",
+					"title": "Email"
+				}
+      ],
+      "title": "Ask Oracle",
+      "guidance": "",
+      "requests": [
+        {
+          "url": "https://api.example.com/ask",
+          "method": "POST",
+          "headers": [
+            "Content-Type: application/json"
+          ],
+          "mapping": [
+            {
+              "name": "judgement",
+              "path": "$.message.judgement",
+              "type": "string",
+              "title": "The Answer"
+            }
+          ],
+          "payload": {
+						"firstName": "[[firstname]]",
+						"lastName": "[[lastname]]",
+						"email": "[[email]]"
+					}
+        }
+      ],
+      "description": "Random game with random answers to attract the unassuming"
+    }
+  ]
+}
