@@ -3,6 +3,7 @@ import { IHexagram } from './oracle';
 
 interface Hexagram {
     judgement: string;
+    title: string;
     changes: string[];
 }
 
@@ -13,11 +14,12 @@ const getJudgement: (iHexagram: IHexagram) => Hexagram = (iHexagram) => {
         throw new Error('Something went wrong!');
     }
 
-    const { judgement, lines } = result;
+    const { judgement, lines, title } = result;
 
     if (!iHexagram.change) {
         return {
             judgement,
+            title,
             changes: [],
         };
     }
@@ -26,6 +28,7 @@ const getJudgement: (iHexagram: IHexagram) => Hexagram = (iHexagram) => {
 
     return {
         judgement,
+        title,
         changes,
     };
 };
